@@ -5,7 +5,8 @@
  - [ProGit](http://git-scm.com/book)
   - The book is on [GitHub](https://github.com/progit/progit)!
  - [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf)
-  - This link is broken as of 2/24, so I've included the [pdf](/2014/0225-git_with_confidence/references/git.from.bottom.up.pdf) in the repository.
+
+  - This link is broken as of 2/24, so I've included the [pdf](/2014/0225-git_with_confidence/references/git.from.bottom.up.pdf?raw=true) in the repository.
 
 ## Git objects ##
 
@@ -35,9 +36,7 @@ even a filename.
 
 Relationship between the repository, the working tree, and the index:
 
-<div style="text-align: center;">
 ![workflow](img/git_workflow.png)
-</div>
 
 Commands:
 
@@ -59,27 +58,19 @@ content itself.
 
 This is what a tree looks like:
 
-<div style="text-align: center;">
 ![tree](img/git_tree.png)
-</div>
 
 This is what a commit looks like:
 
-<div style="text-align: center;">
 ![commit](img/git_commit.png)
-</div>
 
 This is what several commits look like:
 
-<div style="text-align: center;">
 ![commits](img/git_commit_parents.png)
-</div>
 
 This is what a branch looks like:
 
-<div style="text-align: center;">
 ![branch](img/git_branch.png)
-</div>
 
 You can explore blobs, trees, and commits using `git cat-file`:
 
