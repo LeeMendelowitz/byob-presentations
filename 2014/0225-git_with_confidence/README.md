@@ -5,8 +5,10 @@
  - [ProGit](http://git-scm.com/book)
   - The book is on [GitHub](https://github.com/progit/progit)!
  - [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf)
-
   - This link is broken as of 2/24, so I've included the [pdf](/2014/0225-git_with_confidence/references/git.from.bottom.up.pdf?raw=true) in the repository.
+
+ - [Cool interactive cheat sheet](http://ndpsoftware.com/git-cheatsheet.html)
+ - [Another cheat sheet](http://www.git-tower.com/blog/git-cheat-sheet-detail/)
 
 ## Git objects ##
 
@@ -54,7 +56,7 @@ content itself.
 
 - A file is stored as a **blob** object.
 - A **tree** points to blobs and other trees (i.e. subdirectories) and provide a filename for each.
-- A **commit** points to the commits which preceed it, and additional metadata (such as the commit message, author, author e-mail.)
+- A **commit** points to a tree, the commit (or commits) which immediately preceed it, and additional metadata (such as the commit message, author, author e-mail.)
 
 This is what a tree looks like:
 
@@ -102,4 +104,85 @@ $ git cat-file -p cb8fef9d6f9b6c2b017358c346029ef1fe96d18e
 100644 blob bf96193bc23063b53acc1094b939def349b63c69  README.md
 ```
 
+## Git Branches ##
 
+- Branches are lightweight objects in git - they are nothing other than named references to particular commits.
+  - They are stored as a 41 byte file on your filesystem (40 character hexademical value of the SHA-1 hash of the commit, plus a newline.)
+
+- When you are working on a branch, the branch pointer moves as commits are made.
+
+- Basic commands:
+
+```
+# List branches
+git branch
+
+# List all branches (including remote branches)
+git branch -a 
+
+# Create a new branch
+git checkout -b my_new_branch
+
+# Delete a branch
+git branch -d my_new_branch
+```
+
+- Tip: Branches are disposable! Whenever working on a new feature, create a branch, and delete it when you've
+merged it into your master branch.
+
+- Must read:
+  - [What a branch is](http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is)
+  - [Basic branching and merging](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging)
+
+### Merging ###
+
+To merge changes from a branch into the current branch:
+
+```
+git merge <commit or branch>
+```
+
+Git will automatically resolve conflicts and create a new commit with the completed merge. If the current branch
+is an ancestor of the commit being merged from, then the current branch pointer can simply be moved to that commit.
+
+- See ProGit [Basic branching](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging#Basic-Branching) for an example of a fast-forward merge.
+
+- See ProGit [Basic merging](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging#Basic-Merging) for an example of a recursive merge based on a common ancestor.
+
+### Rebase ###
+
+Rebasing is an alternative to merging. Git rebase can be used to move commits from one branch to another branch,
+which makes for a cleaner commit history. 
+
+##### Example
+
+Before rebase:
+![commits](img/git_before_rebase.png)
+
+```
+# Rebase experiment onto master
+git checkout experiment
+git rebase master
+```
+
+After rebase:
+![commits](img/git_after_rebase.png)
+
+Git rebase can be used to do *crazy* things, like re-order commits, remove commits, or squash multiple commits into a single commit. *Only use git rebase for modifying local changes that have not been shared publicly*.
+
+
+### Stashing ###
+
+Git stash gives you a way of storing a snapshot of your working tree and index (i.e. staging area) and resetting your working
+tree to the last commit. This is really useful when you need to suddenly switch between branches but your working tree is in a "dirty" state.
+
+```
+# Stash your changes
+git stash save my_stash
+
+# List stashes
+git stash list
+
+# Apply stashed changes
+git stash apply
+```
