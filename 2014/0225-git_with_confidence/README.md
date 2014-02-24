@@ -4,11 +4,28 @@
 ## References ##
  - [ProGit](http://git-scm.com/book)
   - The book is on [GitHub](https://github.com/progit/progit)!
- - [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf)
+ - [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf) by John Wiegley
   - This link is broken as of 2/24, so I've included the [pdf](/2014/0225-git_with_confidence/references/git.from.bottom.up.pdf?raw=true) in the repository.
 
  - [Cool interactive cheat sheet](http://ndpsoftware.com/git-cheatsheet.html)
  - [Another cheat sheet](http://www.git-tower.com/blog/git-cheat-sheet-detail/)
+
+ The images in this presentation are from ProGit and from "Git from the bottom up".
+
+ ### Review ###
+
+![workflow](img/git_workflow.png)
+
+Commands:
+
+  - `git init`
+  - `git add`
+  - `git status`
+  - `git commit`
+  - `git push`
+  - `git pull`
+  - `git checkout <branch or commit>`
+
 
 ## Git objects ##
 
@@ -24,7 +41,7 @@
                   stored in the .git hidden directory). The working tree includes all directories
                   and subdirectories in the working tree directory.
 
-- **blob**: A container for file content. Blobs are featureless and store only content, but no metdata - not 
+- **blob**: A container for file content. Blobs are featureless and store only content, but no metadata - not 
 even a filename.
 
 - **branch**: A named reference to a commit. A branch can point to different commits over time.
@@ -34,19 +51,6 @@ even a filename.
 - **HEAD**: A reference which specifies what is currently checked out. HEAD could
   refer to a branch or to a commit.
 
-### Workflow ###
-
-Relationship between the repository, the working tree, and the index:
-
-![workflow](img/git_workflow.png)
-
-Commands:
-
-  - `git init`
-  - `git add`
-  - `git status`
-  - `git commit`
-  - `git checkout <branch or commit>`
 
 ### How git stores data ###
 
@@ -70,9 +74,6 @@ This is what several commits look like:
 
 ![commits](img/git_commit_parents.png)
 
-This is what a branch looks like:
-
-![branch](img/git_branch.png)
 
 You can explore blobs, trees, and commits using `git cat-file`:
 
@@ -105,6 +106,10 @@ $ git cat-file -p cb8fef9d6f9b6c2b017358c346029ef1fe96d18e
 ```
 
 ## Git Branches ##
+
+This is what a branch looks like:
+
+![branch](img/git_branch.png)
 
 - Branches are lightweight objects in git - they are nothing other than named references to particular commits.
   - They are stored as a 41 byte file on your filesystem (40 character hexademical value of the SHA-1 hash of the commit, plus a newline.)
@@ -143,11 +148,38 @@ git merge <commit or branch>
 ```
 
 Git will automatically resolve conflicts and create a new commit with the completed merge. If the current branch
-is an ancestor of the commit being merged from, then the current branch pointer can simply be moved to that commit.
+is an ancestor of the commit being merged from, then the current branch pointer can simply be moved to that commit. This is known as a fast-forward merge.
 
-- See ProGit [Basic branching](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging#Basic-Branching) for an example of a fast-forward merge.
+#### Example of a fast forward merge
 
-- See ProGit [Basic merging](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging#Basic-Merging) for an example of a recursive merge based on a common ancestor.
+Before the merge:
+
+![before_merge](img/git_before_ff_merge.png)
+
+```
+git checkout master
+git merge hotfix
+```
+
+After the merge:
+
+![after_merge](img/git_after_ff_merge.png)
+
+
+#### Example of a recursive merge
+
+![before_merge](img/git_before_recursive_merge.png)
+
+```
+git checkout master
+git merge iss53
+```
+
+After the merge:
+
+![after_merge](img/git_after_recursive_merge.png)
+
+- See ProGit [Basic branching and merging](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging) for more details.
 
 ### Rebase ###
 
@@ -157,6 +189,7 @@ which makes for a cleaner commit history.
 ##### Example
 
 Before rebase:
+
 ![commits](img/git_before_rebase.png)
 
 ```
@@ -166,6 +199,7 @@ git rebase master
 ```
 
 After rebase:
+
 ![commits](img/git_after_rebase.png)
 
 Git rebase can be used to do *crazy* things, like re-order commits, remove commits, or squash multiple commits into a single commit. *Only use git rebase for modifying local changes that have not been shared publicly*.
