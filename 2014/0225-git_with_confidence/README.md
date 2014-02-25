@@ -13,7 +13,7 @@
  The images in this presentation are from Pro Git and from "Git from the bottom up", which are made available
  under the [Creative Commons Attribution Non Commercial Share Alike 3.0 license](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
- ### Review ###
+## Review ##
 
 ![workflow](img/git_workflow.png)
 
