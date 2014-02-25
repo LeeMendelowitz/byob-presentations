@@ -150,7 +150,7 @@ $ git nicelog
 * 6df7073 Added Git tutorial links
 ```
 
-Use the `--all` option to see all commits, not just those reachable from HEAD.
+Use the `--all` option to see all commits reachable from any branch or from the stash.
 
 ## Git Branches ##
 
@@ -194,7 +194,7 @@ To merge changes from a branch into the current branch:
 git merge <commit or branch>
 ```
 
-Git will automatically resolve conflicts and create a new commit with the completed merge. If the current branch
+Git will automatically merge the snapshot if there are no conflicts and create a new commit with the completed merge. If the current branch
 is an ancestor of the commit being merged from, then the current branch pointer can simply be moved to that commit. This is known as a fast-forward merge.
 
 #### Example of a fast forward merge
@@ -252,18 +252,46 @@ After rebase:
 Git rebase can be used to do *crazy* things, like re-order commits, remove commits, or squash multiple commits into a single commit. *Only use git rebase for modifying local changes that have not been shared publicly*.
 
 
+## Other Utilities ##
+
 ### Stashing ###
 
 Git stash gives you a way of storing a snapshot of your working tree and index (i.e. staging area) and resetting your working
-tree to the last commit. This is really useful when you need to suddenly switch between branches but your working tree is in a "dirty" state.
+tree to the last commit. This is really useful when:
+ - you need to suddenly switch between branches but your working tree is in a "dirty" state.
+ - when you want to create a commit to permanently hold on to your changes, but don't want the commit to be part of a branch's history.
 
 ```
 # Stash your changes
-git stash save my_stash
+$ git stash save my_stash
 
 # List stashes
-git stash list
+$ git stash list
 
 # Apply stashed changes
-git stash apply
+$ git stash apply
 ```
+
+### Reset ###
+
+Use `git reset` to move the branch head to a particular commit. This can potentially change the working tree and the index
+depending on the mode which is used:
+
+ - `git reset --soft <commit>` will move the branch to the specified commit, but will not modify the working tree or the index.
+ - `git reset --mixed <commit>` will move the branch to the specified commit and will reset the index, but not the working tree.
+ - `git reset --hard <commit>` will move the branch to the specified commit and will reset the index and will reset the working tree. ** This is potentially dangerous because any uncommitted changes in your working tree will be lost forever **.
+
+ It's best to do `git reset` on a temporary experimental branch before moving your `master` branch. It's also good practice to do a `git stash` before performing a `git reset --hard`, in case you need to recover.
+
+```
+$ git reset <mode> <commit>
+```
+
+### Reflog ###
+
+Git keeps a log of the commits that HEAD has pointed to over the last 30 days. You can see these commits with `git reflog`.
+This can be used to help you access "orphaned" commits which are no longer reachable from a branch.
+
+### GUI Clients ### 
+
+Gitk is a git repository browser that ships with git. Other GUI's are listed [here](http://git-scm.com/downloads/guis).
