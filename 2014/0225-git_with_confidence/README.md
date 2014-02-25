@@ -2,7 +2,7 @@
 
 
 ## References ##
- - [ProGit](http://git-scm.com/book)
+ - [Pro Git](http://git-scm.com/book)
   - The book is on [GitHub](https://github.com/progit/progit)!
  - [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf) by John Wiegley
   - This link is broken as of 2/24, so I've included the [pdf](/2014/0225-git_with_confidence/references/git.from.bottom.up.pdf?raw=true) in the repository.
@@ -10,7 +10,8 @@
  - [Cool interactive cheat sheet](http://ndpsoftware.com/git-cheatsheet.html)
  - [Another cheat sheet](http://www.git-tower.com/blog/git-cheat-sheet-detail/)
 
- The images in this presentation are from ProGit and from "Git from the bottom up".
+ The images in this presentation are from Pro Git and from "Git from the bottom up", which are made available
+ under the [Creative Commons Attribution Non Commercial Share Alike 3.0 license](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
  ### Review ###
 
@@ -75,7 +76,7 @@ This is what several commits look like:
 ![commits](img/git_commit_parents.png)
 
 
-You can explore blobs, trees, and commits using `git cat-file`:
+You can explore blobs, trees, and commits using `git cat-file` (but this is not necessary in practice):
 
 ```
 $ git cat-file -t 5eab59d5579379e7ac24ca8d0515e077bbd7bb9c
