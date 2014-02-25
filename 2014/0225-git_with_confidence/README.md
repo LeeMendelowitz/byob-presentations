@@ -107,6 +107,50 @@ $ git cat-file -p cb8fef9d6f9b6c2b017358c346029ef1fe96d18e
 
 #### Viewing commit history
 
+Use the `git log` command to see the commit history:
+
+```
+# Show the last 5 commits from HEAD
+$ git log --oneline -n 5
+
+5eab59d Added Steve Mount's RNA-Seq normalization presentation
+0227a74 Merge branch 'master' of github.com:umd-byob/presentations
+931eda5 Fixed a few typos in Git tutorial
+a4f083c Update README.md
+6df7073 Added Git tutorial links
+
+# Show the commit history as a graph.
+$ git log --oneline --abbrev-commit --graph --decorate --color
+
+* 5eab59d (orig/master, orig/HEAD, fork/master, master) Added Steve Mount's RNA-
+*   0227a74 Merge branch 'master' of github.com:umd-byob/presentations
+|\
+| * a4f083c Update README.md
+* | 931eda5 Fixed a few typos in Git tutorial
+|/
+* 6df7073 Added Git tutorial links
+```
+
+I find the previous command useful, so I created an alias for it:
+
+```
+# Set the 'nicelog' alias
+$ git config --global alias.nicelog "log --oneline --abbrev-commit --graph --decorate --color"
+
+# Call git nicelog
+$ git nicelog
+
+* 5eab59d (orig/master, orig/HEAD, fork/master, master) Added Steve Mount's RNA-
+*   0227a74 Merge branch 'master' of github.com:umd-byob/presentations
+|\
+| * a4f083c Update README.md
+* | 931eda5 Fixed a few typos in Git tutorial
+|/
+* 6df7073 Added Git tutorial links
+```
+
+Use the `--all` option to see all commits, not just those reachable from HEAD.
+
 ## Git Branches ##
 
 This is what a branch looks like:
