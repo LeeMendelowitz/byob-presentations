@@ -67,16 +67,16 @@ This is what a tree looks like:
 
 ![tree](img/git_tree.png)
 
-This is what a commit looks like:
+This is what an initial commit looks like:
 
 ![commit](img/git_commit.png)
 
-This is what several commits look like:
+This is what several commits look like. Note that each commit has a parent commit, except for the initial commit.
 
 ![commits](img/git_commit_parents.png)
 
 
-You can explore blobs, trees, and commits using `git cat-file` (but this is not necessary in practice):
+You can explore blobs, trees, and commits using `git cat-file` (but this is never necessary in practice):
 
 ```
 $ git cat-file -t 5eab59d5579379e7ac24ca8d0515e077bbd7bb9c
@@ -191,10 +191,10 @@ merged it into your master branch.
 To merge changes from a branch into the current branch:
 
 ```
-git merge <commit or branch>
+$ git merge <commit or branch>
 ```
 
-Git will automatically merge the snapshot if there are no conflicts and create a new commit with the completed merge. If the current branch
+Git will automatically merge selected commit into the current branch if there are no conflicts. This will create a new commit with the completed merge. If the current branch
 is an ancestor of the commit being merged from, then the current branch pointer can simply be moved to that commit. This is known as a fast-forward merge.
 
 #### Example of a fast forward merge
@@ -204,8 +204,8 @@ Before the merge:
 ![before_merge](img/git_before_ff_merge.png)
 
 ```
-git checkout master
-git merge hotfix
+$ git checkout master
+$ git merge hotfix
 ```
 
 After the merge:
@@ -218,8 +218,8 @@ After the merge:
 ![before_merge](img/git_before_recursive_merge.png)
 
 ```
-git checkout master
-git merge iss53
+$ git checkout master
+$ git merge iss53
 ```
 
 After the merge:
@@ -241,8 +241,8 @@ Before rebase:
 
 ```
 # Rebase experiment onto master
-git checkout experiment
-git rebase master
+$ git checkout experiment
+$   git rebase master
 ```
 
 After rebase:
@@ -274,6 +274,7 @@ $ git stash apply
 
 ### Reset ###
 
+
 Use `git reset` to move the branch head to a particular commit. This can potentially change the working tree and the index
 depending on the mode which is used:
 
@@ -283,15 +284,13 @@ depending on the mode which is used:
 
  It's best to do `git reset` on a temporary experimental branch before moving your `master` branch. It's also good practice to do a `git stash` before performing a `git reset --hard`, in case you need to recover.
 
-```
-$ git reset <mode> <commit>
-```
 
 ### Reflog ###
 
 Git keeps a log of the commits that HEAD has pointed to over the last 30 days. You can see these commits with `git reflog`.
 This can be used to help you access "orphaned" commits which are no longer reachable from a branch.
 
-### GUI Clients ### 
+
+### GUI Clients ###
 
 Gitk is a git repository browser that ships with git. Other GUI's are listed [here](http://git-scm.com/downloads/guis).
