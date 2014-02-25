@@ -27,7 +27,7 @@ Commands:
   - `git checkout <branch or commit>`
 
 
-## Git objects ##
+## Git terminology ##
 
 - **repository**: A collection of **commits** which serves as an archive of 
                 what the project's **working tree** looked like over time. It also stores additional data,
@@ -52,7 +52,7 @@ even a filename.
   refer to a branch or to a commit.
 
 
-### How git stores data ###
+## Commits ##
 
 Git stores data in **blobs**, **trees**, and **commits**. Git is a **content addressable filesystem**, meaning data
 is stored in key-value pairs. The key is the SHA-1 hash of the object's contents, and the value is the
@@ -104,6 +104,8 @@ $ git cat-file -p cb8fef9d6f9b6c2b017358c346029ef1fe96d18e
 040000 tree e2c10734af096e4dda2c70774869dbdc405f58f3  2014
 100644 blob bf96193bc23063b53acc1094b939def349b63c69  README.md
 ```
+
+#### Viewing commit history
 
 ## Git Branches ##
 
