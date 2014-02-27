@@ -249,7 +249,11 @@ After rebase:
 
 ![commits](img/git_after_rebase.png)
 
-Git rebase can be used to do *crazy* things, like re-order commits, remove commits, or squash multiple commits into a single commit. *Only use git rebase for modifying local changes that have not been shared publicly*.
+`git rebase` can be used to do *crazy* things, like re-order commits, remove commits, or squash multiple commits into a single commit.
+For more information on how to use `git rebase` in this manner, see the chapter on [rewriting history in Pro Git](http://git-scm.com/book/en/Git-Tools-Rewriting-History).
+
+* Note: Only use git rebase for modifying local changes that have not been shared publicly*. When you use git-rebase,
+you are effectively modifying the history of the repository. If those commits which you are "revising" with `git rebase` have already been made public, other people may have based their work off of that commit history. Then you'll have a mess on your hands.
 
 
 ## Other Utilities ##
